@@ -12,7 +12,7 @@
   },
   "aws": {
     "enabled": false,
-    "bucket": "some-backup",
+    "bucket": "mybucket",
     "path": "mydb-db-prod",
     "access_key": "secret",
     "secret_key": "secret"

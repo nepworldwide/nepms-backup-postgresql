@@ -1,0 +1,39 @@
+{
+  "database": {
+    "host": "localhost",
+    "db": "mydb",
+    "user": "readonly",
+    "password": ""
+  },
+  "prometheus": {
+    "enabled": true,
+    "host": "prometheus-pushgateway.domain.com",
+    "job": "mydb_db_backup"
+  },
+  "aws": {
+    "enabled": false,
+    "bucket": "some-backup",
+    "path": "mydb-db-prod",
+    "access_key": "secret",
+    "secret_key": "secret"
+  },
+  "backup": {
+    "dump_bin": "/usr/pgsql-9.4/bin/bdr_dump",
+    "output_dir": "/data/db/backups/",
+    "keep_local_backups": 1,
+    "jobs": [
+      {
+        "name": "mydb_prod_db_schema",
+        "type": "schema",
+        "enabled": true,
+        "compression": true
+      },
+      {
+        "name": "mydb_prod_db_data",
+        "type": "data",
+        "enabled": false,
+        "compression": true
+      }
+    ]
+  }
+}

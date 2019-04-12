@@ -26,13 +26,15 @@
         "name": "mydb_prod_db_schema",
         "type": "schema",
         "enabled": true,
-        "compression": true
+        "compression": true,
+        "compression_with_pigz": true
       },
       {
         "name": "mydb_prod_db_data",
         "type": "data",
         "enabled": false,
-        "compression": true
+        "compression": true,
+        "compression_with_pigz": true
       }
     ]
   }

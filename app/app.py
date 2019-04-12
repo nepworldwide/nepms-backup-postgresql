@@ -118,6 +118,7 @@ def run_job(configuration):
     db_pass = configuration["password"]
     dump_type = configuration["type"]
     compression = configuration["compression"]
+    compression_with_pigz = configuration["compression_with_pigz"]
 
     create_dir_cmd = f"mkdir -p {job_backup_dir}"
 
@@ -170,7 +171,10 @@ def run_job(configuration):
         compression_duration = None
         # Compression
         if compression:
-            compression_cmd = f"gzip {output}"
+            if compression_with_pigz:
+                compression_cmd = f"pigz {output}"
+            else:
+                compression_cmd = f"gzip {output}"
             compression_start_time = time.time()
             log.info(f"Compressing file: '{output}'")
             log.debug(f"Compressing file cmd: [{compression_cmd}]")
@@ -293,6 +297,9 @@ if __name__ == "__main__":
                 name=job["name"],
                 type=job["type"],
                 compression=job["compression"],
+                compression_with_pigz=job["compression_with_pigz"]
+                if "compression_with_pigz" in job
+                else False,
             )
             log.debug(f"Job params: {job_conf}")
             # Run backup job
